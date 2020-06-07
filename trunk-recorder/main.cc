@@ -367,6 +367,7 @@ void load_config(string config_file)
       int    gain           = node.second.get<double>("gain", 0);
       int    if_gain        = node.second.get<double>("ifGain", 0);
       int    bb_gain        = node.second.get<double>("bbGain", 0);
+      int    bb_bandwidth   = node.second.get<double>("bbBandwidth", 0);
       int    mix_gain       = node.second.get<double>("mixGain", 0);
       int    lna_gain       = node.second.get<double>("lnaGain", 0);
       int    pga_gain       = node.second.get<double>("pgaGain", 0);
@@ -398,6 +399,7 @@ void load_config(string config_file)
       BOOST_LOG_TRIVIAL(info) << "Gain: " << node.second.get<double>("gain", 0);
       BOOST_LOG_TRIVIAL(info) << "IF Gain: " << node.second.get<double>("ifGain", 0);
       BOOST_LOG_TRIVIAL(info) << "BB Gain: " << node.second.get<double>("bbGain", 0);
+      BOOST_LOG_TRIVIAL(info) << "BB Bandwidth: " << node.second.get<double>("bbBandwidth", 0);
       BOOST_LOG_TRIVIAL(info) << "LNA Gain: " << node.second.get<double>("lnaGain", 0);
       BOOST_LOG_TRIVIAL(info) << "PGA Gain: " << node.second.get<double>("pgaGain", 0);
       BOOST_LOG_TRIVIAL(info) << "TIA Gain: " << node.second.get<double>("tiaGain", 0);
@@ -487,6 +489,10 @@ void load_config(string config_file)
 
       if (!gain_set) {
         BOOST_LOG_TRIVIAL(error) << "! No Gain was specified! Things will probably not work";
+      }
+
+      if (bb_bandwidth != 0) {
+        source->set_bb_bandwidth(bb_bandwidth);
       }
 
       source->set_gain_mode(agc);

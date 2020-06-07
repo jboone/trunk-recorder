@@ -29,6 +29,7 @@ class Source
 								bool gain_mode;
 								int gain;
 								int bb_gain;
+								int bb_bandwidth;
 								int if_gain;
 								int lna_gain;
 								int tia_gain;
@@ -88,6 +89,8 @@ public:
 								double get_digital_levels();
 								void set_bb_gain(int b);
 								int get_bb_gain();
+								void set_bb_bandwidth(int b);
+								int get_bb_bandwidth();
 								void set_mix_gain(int b);
 								int get_mix_gain();
 								void set_lna_gain(int b);

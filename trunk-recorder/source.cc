@@ -222,6 +222,19 @@ int Source::get_bb_gain() {
   return bb_gain;
 }
 
+void Source::set_bb_bandwidth(int b)
+{
+  if (driver == "osmosdr") {
+    bb_bandwidth = b;
+    cast_to_osmo_sptr(source_block)->set_bandwidth(bb_bandwidth);
+    BOOST_LOG_TRIVIAL(info) << "BB Bandwidth set to: " << cast_to_osmo_sptr(source_block)->get_bandwidth();
+  }
+}
+
+int Source::get_bb_bandwidth() {
+  return bb_bandwidth;
+}
+
 void Source::set_gain(int r)
 {
   if (driver == "osmosdr") {
